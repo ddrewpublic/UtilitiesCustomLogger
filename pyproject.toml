@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "utilities_custom_logger"                 # private name; hyphens ok, but keep import as underscores
+version = "0.1.0"
+description = "Rich + file-based logging setup utility for CLI-based data processing workflows"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Daniel Drew" }]
+# Keep it clearly private
+license = { text = "Proprietary - Private Use Only" }
+classifiers = ["Private :: Do Not Upload"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

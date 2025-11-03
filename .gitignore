@@ -1,0 +1,27 @@
+    # ---- output and _archive directories
+_archive/
+_logs/
+_testing/
+build/
+dist/
+
+# ---- output and input files
+*.log
+
+# ---- other random local only files
+notes.md
+
+# "secret" files
+.env
+
+# ---- Python & IDE cruft
+__pycache__/
+*.py[cod]
+.idea/
+.venv/
+.eggs/
+.coverage/
+*.egg-info/
+
+# Exceptions
+
