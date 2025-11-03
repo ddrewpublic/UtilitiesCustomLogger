@@ -9,8 +9,13 @@
 ## Installation
 ```bash
 echo "utilities-custom-logger @ git+ssh://git@github.com/ddrewpublic/utilitiescustomlogger.git@v0.1.0" | tee -a requirements.txt
+pip install -r requirements.txt
 ```
 
+## Upgrade
+```bash
+pip install --upgrade --force-reinstall --no-cache-dir "git+ssh://git@github.com/ddrewpublic/utilitiescustomlogger.git@main"
+```
 
 # Usage
 ```python
