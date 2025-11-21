@@ -187,21 +187,26 @@ def setup_logger(log_file: Optional[Path] = None,
         logger.handlers.clear()
     logger.setLevel(level.upper())
 
-    # ---- Console handler with Rich formatting ----
+    # Standard formatter for files AND console (aligned columns)
+    file_fmt = AlignedFileFormatter(
+        datefmt="%Y-%m-%d %H:%M:%S",
+        message_col=32,
+        source_col=width,
+    )
+
+    # Console handler with Rich, but using our aligned formatter
     rich_handler = RichHandler(
         console=Console(file=sys.stdout),  # stdout as before
         rich_tracebacks=True,
-        show_time=True,  # show time on the left column
-        show_level=True,  # show [LEVEL]
-        show_path=True,  # file:line on the right column
-        log_time_format="%Y-%m-%d %H:%M:%S",  # ==> "2025-10-10 12:40:42"
-        omit_repeated_times=False,  # <— add t
+        # let our formatter handle time/level/path so alignment matches the file
+        show_time=False,
+        show_level=False,
+        show_path=False,
+        log_time_format="%Y-%m-%d %H:%M:%S",
+        omit_repeated_times=False,
     )
+    rich_handler.setFormatter(file_fmt)
     logger.addHandler(rich_handler)
-
-    # Standard formatter for files (keeps existing format)
-    # file_fmt = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s %(pathname)s:%(lineno)d", "%Y-%m-%d %H:%M:%S")
-    file_fmt = AlignedFileFormatter(datefmt="%Y-%m-%d %H:%M:%S", message_col=32, source_col=width)
 
     if log_file:
         log_file = Path(log_file).resolve()
