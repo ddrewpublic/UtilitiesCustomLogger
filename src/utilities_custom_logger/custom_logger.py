@@ -15,11 +15,39 @@ from rich.console import Console
 from pathlib import Path
 from typing import Optional
 
+# --- version metadata -------------------------------------------------------
+from importlib.metadata import PackageNotFoundError, version as _pkg_version
+
 # prevent multiple installations across repeated setup_logger calls
 _EXC_HOOKS_INSTALLED = False
 _ORIG_SYS_EXCEPTHOOK = None
 _ORIG_THREADING_EXCEPTHOOK = None
 _ORIG_ASYNCIO_HANDLER = None
+
+_PACKAGE_NAME = "utilities_custom_logger"  # matches pyproject.toml
+# Optional fallback module-defined version if metadata not available
+__version__ = "0.3.0"
+
+
+def get_logger_version() -> str:
+    """Return the version string for this logging utility.
+
+    Resolution order:
+        1. Installed package metadata for `utilities_custom_logger`
+           (from pyproject.toml).
+        2. Local ``__version__`` constant as a fallback.
+
+    Returns:
+        str: Semantic version string, e.g. "0.3.0".
+    """
+    try:
+        return _pkg_version(_PACKAGE_NAME)
+    except PackageNotFoundError:
+        # Not installed as a package – fall back to local constant.
+        return __version__
+    except Exception:
+        # Defensive: never let version lookup break logging.
+        return __version__
 
 
 # --- add near other logging helpers in custom_logger.py ---
