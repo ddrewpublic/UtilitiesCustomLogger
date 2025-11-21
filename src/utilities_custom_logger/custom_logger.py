@@ -16,7 +16,15 @@ from pathlib import Path
 from typing import Optional
 
 # --- version metadata -------------------------------------------------------
-from importlib.metadata import PackageNotFoundError, version as _pkg_version
+# comment: compat import for Python 3.7–3.10+
+try:
+    # Python 3.8+
+    from importlib.metadata import PackageNotFoundError, version as _pkg_version  # noqa
+except ImportError:  # Python < 3.8
+    from importlib_metadata import (  # type: ignore[import]
+        PackageNotFoundError,
+        version as _pkg_version,
+    )
 
 # prevent multiple installations across repeated setup_logger calls
 _EXC_HOOKS_INSTALLED = False
