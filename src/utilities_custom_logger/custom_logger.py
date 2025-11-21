@@ -231,10 +231,16 @@ def setup_logger(log_file: Optional[Path] = None,
     )
 
     # Console handler with Rich, but using our aligned formatter
+    # comment: disable Rich's own wrapping so lines aren't hard-wrapped at 80 cols when piped/tee'd
+    console = Console(
+        file=sys.stdout,
+        soft_wrap=True,   # disable Rich word-wrapping & cropping
+        # width=width,    # optional: uncomment if you want Rich to *know* the width
+    )
+
     rich_handler = RichHandler(
-        console=Console(file=sys.stdout),  # stdout as before
+        console=console,
         rich_tracebacks=True,
-        # let our formatter handle time/level/path so alignment matches the file
         show_time=False,
         show_level=False,
         show_path=False,
