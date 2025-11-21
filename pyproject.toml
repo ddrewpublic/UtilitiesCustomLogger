@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "utilities_custom_logger"                 # private name
-version = "0.4.0"
+version = "0.5.0"
 description = "Rich + file-based logging setup utility for CLI-based data processing workflows"
 readme = "README.md"
 requires-python = ">=3.10"

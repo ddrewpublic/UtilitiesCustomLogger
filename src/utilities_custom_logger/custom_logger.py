@@ -234,8 +234,8 @@ def setup_logger(log_file: Optional[Path] = None,
     # comment: disable Rich's own wrapping so lines aren't hard-wrapped at 80 cols when piped/tee'd
     console = Console(
         file=sys.stdout,
-        soft_wrap=True,   # disable Rich word-wrapping & cropping
-        # width=width,    # optional: uncomment if you want Rich to *know* the width
+        soft_wrap=True,     # don't hard-wrap or crop text at terminal width
+        width=None,         # let it print full lines even when not a TTY
     )
 
     rich_handler = RichHandler(
