@@ -1,6 +1,7 @@
 ## About
 
 * Rich + file-based logging setup utility for CLI-based data processing workflows.
+* Wrapper for python native logging
 * Supports config-driven base paths and multiple output files.
 * Supports logging terminal output / exceptions to file
 * Tested on `Python 3.10.15` 
